@@ -9,5 +9,6 @@ export const {PORT, DB_URL,
       CLOUDINARY_API_KEY,
       CLOUDINARY_API_SECRET,
       ARCJET_ENV,
-      ARCJET_KEY
+      ARCJET_KEY,
+      CORS_ORIGIN
     } = process.env;
