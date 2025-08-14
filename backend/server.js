@@ -24,6 +24,9 @@ app.use(
 );
 
 app.use(arcjet);
+app.use("/",(req,res)=>{
+    res.json("welcome to MarketMate api")
+})
 
 app.use("/api/auth", authRouter);
 app.use("/api/stores", storesRouter);
