@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useProductStore } from "../stores/useProductStore";
-import { Loader, PlusCircle, Upload } from "lucide-react";
+import { Loader, PlusCircle, Upload, User } from "lucide-react";
 import { useStore } from "../stores/useStoreStore";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const CreateNewProduct = () => {
   const categories = [
@@ -18,10 +19,9 @@ const CreateNewProduct = () => {
   const { loading, createPruduct } = useProductStore();
   const { store, getStore } = useStore();
 
-  useEffect(() => {
+  useEffect( () => {
     getStore();
   }, []);
-  console.log(store?.store[0]._id);
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
@@ -30,6 +30,7 @@ const CreateNewProduct = () => {
     store: "",
     image: "",
   });
+
   useEffect(() => {
   if (store?.store?.length > 0) {
     setNewProduct((prev) => ({
@@ -41,6 +42,9 @@ const CreateNewProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!newProduct.store){
+      toast.error("the store is not loaded yet!")
+    }
     createPruduct(newProduct);
   };
 
