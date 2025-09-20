@@ -4,7 +4,8 @@ config({path:".env.development"});
 
 export const {PORT, DB_URL,
       ACCESS_TOKEN,
-      REFRESH_TOKEN,REDIS_URL,
+      REFRESH_TOKEN,
+      REDIS_URL,
       NODE_ENV,CLOUDINARY_CLOUD_NAME,
       CLOUDINARY_API_KEY,
       CLOUDINARY_API_SECRET,

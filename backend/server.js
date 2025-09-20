@@ -7,24 +7,30 @@ import storesRouter from "./routes/stores.route.js";
 import productRouter from "./routes/product.route.js";
 import orderRouter from "./routes/order.route.js";
 import cors from "cors";
-import { arcjet } from "./middleware/arcjet.middleware.js";
 
+const PORT = LOCAL_PORT || 5000;
 const app = express();
-
-const PORT =  LOCAL_PORT ||5000;
-
-app.use(express.json());
-app.use(cookieParser());
 
 app.use(
   cors({
-    origin: CORS_ORIGIN || "http://localhost:5173",
+    origin: "http://localhost:5173",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
+app.use(express.json());
+app.use(cookieParser());
 
-app.use(arcjet);
-
+app.get("/", (req, res) => {
+  res.json("welcome");
+});
+app.use((req, res, next) => {
+  console.log("➡️", req.method, req.url, "Headers:", req.headers);
+  next();
+});
+app.get("/api/test", (req, res) => {
+  res.json({ msg: "Backend working ✅" });
+});
 app.use("/api/auth", authRouter);
 app.use("/api/stores", storesRouter);
 app.use("/api/product", productRouter);

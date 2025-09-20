@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import { useUserStore } from "../stores/useUserStore";
 const NavBar = () => {
   const navLinks = [
-  { label: "Home", url: "/" },
-  { label: "Stores", url: "/stores" },
-  { label: "My store", url: "/mystore" },
-  { label: "Products", url: "/products" },
-  { label: "My Orders", url: "/myorders" },
-];
+    { label: "Home", url: "/" },
+    { label: "Stores", url: "/stores" },
+    { label: "My store", url: "/mystore" },
+    { label: "Products", url: "/products" },
+    { label: "My Orders", url: "/myorders" },
+  ];
 
   const { user, logOut } = useUserStore();
-  console.log(user)
   return (
     <header className=" top-0 left-0 right-0 h-15 z-50 backdrop-blur border-b border-gray-300 bg-gray-800 px-4 md:px-8 py-2">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -47,8 +46,6 @@ const NavBar = () => {
                 alt=""
               />
             </>
-            
-            
           ) : (
             <>
               <Link
