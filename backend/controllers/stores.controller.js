@@ -51,8 +51,8 @@ export const createStore = async (req, res) => {
 export const getStore = async (req, res) => {
   try {
     const { id } = req.params;
-    const owner = await User.find({_id: id})
-    const store = await Store.find({ owner: id });
+    const owner = await User.findById(id);
+    const store = await Store.findOne({ owner: id });
     if (!store || store.length === 0) {
       return res.status(400).json({
         success: false,
@@ -63,7 +63,7 @@ export const getStore = async (req, res) => {
       success: true,
       store: {
         name: store.name,
-        ownerId:store.ownerId,
+        ownerId:store.owner,
         owner: owner.name
       }
     });

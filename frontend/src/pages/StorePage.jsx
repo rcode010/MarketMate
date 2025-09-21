@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useStore } from "../stores/useStoreStore";
 import { useParams } from "react-router-dom";
 import { PersonStanding } from "lucide-react";
+import LoadingSpinner from "../components/LoadingSpinner";
 const StorePage = () => {
   const { store, getStore } = useStore();
-  const {id} = useParams();
+  const { id } = useParams();
   useEffect(() => {
     getStore(id);
-  }, [store]);
+  }, []);
 
   const [storeInfo, setStoreInfo] = useState({
     name: "The Cozy Corner Bookstore",
@@ -35,16 +36,17 @@ const StorePage = () => {
     const todayHours = storeInfo.hours.find((h) => h.day === today);
     return todayHours && todayHours.time !== "Closed";
   };
-  console.log(store)
-const Store = store?.store;
-console.log(Store)
+  const Store = store?.store;
+  if(!Store){
+    return <LoadingSpinner/>
+  }
   return (
     <div className="min-h-screen   flex justify-center items-start sm:p-6 mt-10 ">
       <div className="w-full  max-w-2xl  rounded-3xl shadow-2xl overflow-hidden md:p-10">
         <div className="flex flex-col md:flex-row  md:items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-              {Store}
+              {Store.name}
             </h1>
             <p className="text-sm font-semibold text-gray-500 uppercase">
               {isStoreOpenToday() ? (
@@ -84,11 +86,11 @@ console.log(Store)
         {/* Address and Contact section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 border-t border-gray-200 pt-6">
           <div className="flex items-start">
-            <PersonStanding/>
+            <PersonStanding />
             <div>
               <p className="text-white font-medium text-lg">Owner</p>
-              
-                {Store}
+
+              {Store.owner}
             </div>
           </div>
           {/* Address */}
