@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import CreateNewProduct from "./createNewProduct";
 import { Link } from "react-router-dom";
 import { useProductStore } from "../stores/useProductStore.js";
 
@@ -9,7 +8,6 @@ const MyStoreProduct = () => {
     getAllProduct();
   }, [getAllProduct]);
   const Products = product?.products || [];
-  console.log(Products);
   return (
     <div>
       <Link

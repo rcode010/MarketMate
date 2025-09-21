@@ -13,6 +13,7 @@ import {
   PersonStandingIcon,
   ViewIcon,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const StoresPage = () => {
   const { stores, getAllStores } = useStore();
@@ -35,19 +36,18 @@ const StoresPage = () => {
                   aria-hidden="true"
                   className="mr-2 size-5 shrink-0 text-gray-500"
                 />
-                {el.owner}
               </div>
             </div>
 
             {/* Right side */}
             <div className="flex justify-start sm:justify-end">
-              <button
-                type="button"
+              <Link
+                to={`/store/${el.owner}`}
                 className="inline-flex items-center rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 <ViewIcon aria-hidden="true" className="mr-2 size-5" />
                 View
-              </button>
+              </Link>
             </div>
           </div>
       ))}

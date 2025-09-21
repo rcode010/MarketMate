@@ -13,6 +13,7 @@ import MyStorePage from "./pages/MyStorePage";
 import ProductsPage from "./pages/ProductsPage";
 import MyOrderPage from "./pages/MyOrderPage";
 import CreateNewProduct from "./components/createNewProduct";
+import StorePage from "./pages/StorePage";
 
 const App = () => {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -60,6 +61,10 @@ const App = () => {
           <Route
             path="/create-new-product"
             element={user ? <CreateNewProduct /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/store/:id"
+            element={user ? <StorePage /> : <Navigate to="/login" />}
           />
         </Routes>
       </main>

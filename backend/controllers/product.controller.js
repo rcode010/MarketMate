@@ -51,7 +51,6 @@ export const getAProduct = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
       const { store, name, stock, price, category, image } = req.body;
-      console.log(image)
     let cloudinaryResponse = null;
 
     if (image) {
@@ -59,7 +58,6 @@ export const createProduct = async (req, res) => {
         folder: "products",
       });
     }
-    console.log(cloudinaryResponse)
     const createProd = await Product.create({
       store,
       name,

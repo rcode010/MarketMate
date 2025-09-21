@@ -85,7 +85,6 @@ export const LogIn = async (req, res) => {
       const { refreshToken, accessToken } = await generateTokens(user._id);
       await storeToken(user._id, refreshToken);
       await setCookie(res,refreshToken, accessToken);
-      console.log(accessToken);
       res.status(200).json({
         success: true,
         message: "User logged in successfully",

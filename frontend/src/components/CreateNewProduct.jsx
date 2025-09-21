@@ -17,10 +17,10 @@ const CreateNewProduct = () => {
   ];
 
   const { loading, createPruduct } = useProductStore();
-  const { store, getStore } = useStore();
+  const { myStore, getMyStore } = useStore();
 
   useEffect( () => {
-    getStore();
+    getMyStore();
   }, []);
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -32,13 +32,13 @@ const CreateNewProduct = () => {
   });
 
   useEffect(() => {
-  if (store?.store?.length > 0) {
+  if (myStore?.store?.length > 0) {
     setNewProduct((prev) => ({
       ...prev,
-      store: store.store[0]._id,
+      store: myStore.store[0]._id,
     }));
   }
-}, [store]);
+}, [myStore]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

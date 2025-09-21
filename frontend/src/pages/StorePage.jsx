@@ -2,13 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useStore } from "../stores/useStoreStore";
-
-const StoreInfo = () => {
-  const { store, getMyStore } = useStore();
-
+import { useParams } from "react-router-dom";
+import { PersonStanding } from "lucide-react";
+const StorePage = () => {
+  const { store, getStore } = useStore();
+  const {id} = useParams();
   useEffect(() => {
-    getMyStore();
-  }, []);
+    getStore(id);
+  }, [store]);
 
   const [storeInfo, setStoreInfo] = useState({
     name: "The Cozy Corner Bookstore",
@@ -34,14 +35,16 @@ const StoreInfo = () => {
     const todayHours = storeInfo.hours.find((h) => h.day === today);
     return todayHours && todayHours.time !== "Closed";
   };
-
+  console.log(store)
+const Store = store?.store;
+console.log(Store)
   return (
     <div className="min-h-screen   flex justify-center items-start sm:p-6 mt-10 ">
       <div className="w-full  max-w-2xl  rounded-3xl shadow-2xl overflow-hidden md:p-10">
         <div className="flex flex-col md:flex-row  md:items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-              {store?.store[0].name}
+              {Store}
             </h1>
             <p className="text-sm font-semibold text-gray-500 uppercase">
               {isStoreOpenToday() ? (
@@ -80,6 +83,14 @@ const StoreInfo = () => {
 
         {/* Address and Contact section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 border-t border-gray-200 pt-6">
+          <div className="flex items-start">
+            <PersonStanding/>
+            <div>
+              <p className="text-white font-medium text-lg">Owner</p>
+              
+                {Store}
+            </div>
+          </div>
           {/* Address */}
           <div className="flex items-start">
             <svg
@@ -168,4 +179,4 @@ const StoreInfo = () => {
   );
 };
 
-export default StoreInfo;
+export default StorePage;

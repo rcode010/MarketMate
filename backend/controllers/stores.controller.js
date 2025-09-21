@@ -1,4 +1,5 @@
 import Store from "../models/store.model.js";
+import User from "../models/user.model.js";
 
 export const getAllStores = async (req, res) => {
   try {
@@ -50,7 +51,7 @@ export const createStore = async (req, res) => {
 export const getStore = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+    const owner = await User.find({_id: id})
     const store = await Store.find({ owner: id });
     if (!store || store.length === 0) {
       return res.status(400).json({
@@ -60,8 +61,11 @@ export const getStore = async (req, res) => {
     }
     res.status(200).json({
       success: true,
-
-      store,
+      store: {
+        name: store.name,
+        ownerId:store.ownerId,
+        owner: owner.name
+      }
     });
   } catch (error) {
     res.status(400).json({
