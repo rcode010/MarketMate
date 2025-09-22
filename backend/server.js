@@ -24,13 +24,7 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.json("welcome");
 });
-app.use((req, res, next) => {
-  console.log("➡️", req.method, req.url, "Headers:", req.headers);
-  next();
-});
-app.get("/api/test", (req, res) => {
-  res.json({ msg: "Backend working ✅" });
-});
+
 app.use("/api/auth", authRouter);
 app.use("/api/stores", storesRouter);
 app.use("/api/product", productRouter);

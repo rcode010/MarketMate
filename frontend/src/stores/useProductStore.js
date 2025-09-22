@@ -13,7 +13,6 @@ export const useProductStore = create((set) => ({
 
       const res = await axios.post("/product", productData);
       if (res) {
-        console.log("resdata:", res.data);
         toast.success("Product creatd successfully");
       }
       set({ loading: false });
@@ -28,7 +27,6 @@ export const useProductStore = create((set) => ({
       set({ loading: true });
 
       const res = await axios.get("/product");
-      console.log(res.data);
       if (res) {
         set({ product: res.data });
       }

@@ -30,7 +30,6 @@ export const useUserStore = create((set) => ({
       console.log(email, password);
       set({ loading: true });
       const res = await axios.post("/auth/login", { email, password });
-
       if (res) {
         toast.success("Loged in successfully");
       }

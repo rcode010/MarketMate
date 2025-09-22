@@ -12,7 +12,6 @@ export const useStore = create((set) => ({
     try {
       const { user } = useUserStore.getState(); // ✅ get state directly
       const res = await axios.get(`/stores/${user._id}`); // ✅ API request
-      console.log(user);
       set({ myStore: res.data });
     } catch (error) {
       console.error("Error fetching store:", error);
@@ -21,7 +20,6 @@ export const useStore = create((set) => ({
   getAllStores: async () => {
     try {
       const res = await axios.get("/stores");
-      console.log(res?.data)
       set({ stores: res.data });
     } catch (error) {
       console.error("Error fetching store:", error);
@@ -29,7 +27,6 @@ export const useStore = create((set) => ({
   },
   getStore: async(id)=>{
     try {
-      console.log("hello")
       const res = await axios.get(`/stores/${id}`); // ✅ API request
       set({ store: res.data });
     } catch (error) {
