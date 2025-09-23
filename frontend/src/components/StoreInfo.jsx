@@ -2,14 +2,15 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useStore } from "../stores/useStoreStore";
+import LoadingSpinner from "./LoadingSpinner";
 
 const StoreInfo = () => {
-  const { store, getMyStore } = useStore();
+  const { myStore, getMyStore } = useStore();
 
   useEffect(() => {
     getMyStore();
   }, []);
-
+  
   const [storeInfo, setStoreInfo] = useState({
     name: "The Cozy Corner Bookstore",
     address: "123 Main Street, Anytown, USA 12345",
@@ -26,7 +27,7 @@ const StoreInfo = () => {
     isOpen: true, // A simple boolean to indicate if the store is currently open.
     mapLink: "https://maps.google.com/?q=123+Main+Street,+Anytown,+USA",
   });
-
+  
   // A helper function to check if the store is open today.
   // This is a simplified example; a real app would use more robust logic.
   const isStoreOpenToday = () => {
@@ -34,14 +35,18 @@ const StoreInfo = () => {
     const todayHours = storeInfo.hours.find((h) => h.day === today);
     return todayHours && todayHours.time !== "Closed";
   };
-
+  
+  if(!myStore){
+    return <LoadingSpinner/>
+  }
+  const Store = myStore.store
   return (
     <div className="min-h-screen   flex justify-center items-start sm:p-6 mt-10 ">
       <div className="w-full  max-w-2xl  rounded-3xl shadow-2xl overflow-hidden md:p-10">
         <div className="flex flex-col md:flex-row  md:items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-              {store?.store[0].name}
+              {Store.name}
             </h1>
             <p className="text-sm font-semibold text-gray-500 uppercase">
               {isStoreOpenToday() ? (
